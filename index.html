@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock, Paper, Scissors</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-image: url('rockpaperscissors.jpg');
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: hotpink;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 80%;
+    }
+
+    h1 {
+      color: #333333;
+    }
+
+    p {
+      color: #555555;
+    }
+
+    #playButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #playButton:hover {
+      background-color: #0056b3;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #333333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Rock, Paper, Scissors</h1>
+    <p>Choose your move:</p>
+    <button id="playButton">Play</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    // JavaScript code goes here
+    var playButton = document.getElementById("playButton");
+    playButton.addEventListener("click", playGame);
+
+    function playGame() {
+      var playerChoice = prompt("Choose rock, paper, or scissors (or 'quit' to stop playing):").toLowerCase();
+      if (playerChoice === "quit") {
+        playButton.removeEventListener("click", playGame);
+        return; // Exit the function to stop playing
+      }
+      var computerChoice = getComputerChoice();
+      var result = determineWinner(playerChoice, computerChoice);
+      document.getElementById("result").textContent = "Result: " + result;
+    }
+
+    function getComputerChoice() {
+      var choices = ["rock", "paper", "scissors"];
+      var randomIndex = Math.floor(Math.random() * 3);
+      return choices[randomIndex];
+    }
+
+    function determineWinner(playerChoice, computerChoice) {
+      if (playerChoice === computerChoice) {
+        return "It's a tie!";
+      } else if (playerChoice === "rock") {
+        if (computerChoice === "paper") {
+          return "Computer wins!";
+        } else {
+          return "Player wins!";
+        }
+      } else if (playerChoice === "paper") {
+        if (computerChoice === "scissors") {
+          return "Computer wins!";
+        } else {
+          return "Player wins!";
+        }
+      } else if (playerChoice === "scissors") {
+        if (computerChoice === "rock") {
+          return "Computer wins!";
+        } else {
+          return "Player wins!";
+        }
+      } else {
+        return "Invalid choice. Please choose rock, paper, or scissors.";
+      }
+    }
+  </script>
+</body>
+</html>
